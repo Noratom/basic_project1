@@ -2,11 +2,15 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose= require('mongoose');
 const bodyParser= require('body-parser');
+// const path = require('script.js');
+const cors = require('cors');
+
 
 
 
 dotenv.config();
 const app = express();
+app.use(cors());
 
 const connectDB = async () => {
     try {

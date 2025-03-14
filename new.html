@@ -1,0 +1,62 @@
+<?php
+include('db.php');
+
+// Initialize contractor data to null
+$contractor = null;
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get BEDC Registration Number
+    $bedcRegNo = $_POST['bedcRegNo'];
+
+    // Fetch the contractor details based on BEDC Registration Number
+    $sql = "SELECT * FROM [TechContract].[dbo].[BEDCRegistered_Contractors] WHERE [BEDCRegNo] = ?";
+    $params = array($bedcRegNo);
+    $stmt = sqlsrv_query($conn, $sql, $params);
+
+    if ($stmt === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+    // Fetch contractor data if exists
+    $contractor = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contractor Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Contractor Profile</h1>
+
+    <form method="POST">
+        <label for="bedcRegNo">Enter BEDC Registration Number:</label>
+        <input type="text" name="bedcRegNo" id="bedcRegNo" required>
+        <button type="submit">Fetch Profile</button>
+    </form>
+
+    <?php if ($contractor): ?>
+        <h2>Edit Contractor Profile</h2>
+        <form method="POST" action="principal_persons.php" enctype="multipart/form-data">
+            <input type="hidden" name="bedcRegNo" value="<?php echo $contractor['BEDCRegNo']; ?>">
+
+            <label for="companyName">Company Name:</label>
+            <input type="text" name="companyName" id="companyName" value="<?php echo $contractor['CompanyName']; ?>" required>
+
+            <label for="companyAddress">Company Address:</label>
+            <input type="text" name="companyAddress" id="companyAddress" value="<?php echo $contractor['CompanyAddress']; ?>" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="<?php echo $contractor['Email']; ?>" required>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" name="phoneNumber" id="phoneNumber" value="<?php echo $contractor['PhoneNumber']; ?>" required>
+
+            <button type="submit">Next</button>
+        </form>
+    <?php endif; ?>
+</body>
+</html>

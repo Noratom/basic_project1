@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal Persons Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Contractor Registration Form</h1><br>
+        <form id="principalPersonsForm">
+            <div class="section">
+                <div class="form-group">
+                    <label for="CompanyName">Company Name</label>
+                    <input type="text" id="CompanyName" name="CompanyName" placeholder=` ${Principal.companyName}` required><br>
+                </div>
+                <div class="form-group">
+                    <label for="Address">Address</label>
+                    <input type="text" id="Address" name="Address" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="CPhone1">Phone Number</label>
+                    <input type="text" id="CPhone1" name="CPhone1" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="Email1">Email Address</label>
+                    <input type="text" id="Email1" name="Email1" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="BEDCRegNo1">BEDC Registration Number</label>
+                    <input type="text" id="BEDCRegNo1" name="BEDCRegNo1" required><br>
+                </div>
+                <h3>Principal Person 1</h3>
+                <div class="form-group">
+                    <label for="Fname1">First Name</label>
+                    <input type="text" id="Fname1" name="Fname1" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="Mname1">Middle Name</label>
+                    <input type="text" id="Mname1" name="Mname1" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="Lname1">Last Name</label>
+                    <input type="text" id="Lname1" name="Lname1" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="position1">Position</label>
+                    <input type="text" id="position1" name="position1" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="phone1">Phone Number</label>
+                    <input type="text" id="phone1" name="phone1" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="signature1">Sample Signature</label>
+                    <input type="file" id="signature1" name="signature1" accept="image/*" required>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Principal Person 2</h3>
+                <div class="form-group">
+                    <label for="name1">First Name</label>
+                    <input type="text" id="name1" name="name1" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="name1">Middle Name</label>
+                    <input type="text" id="name1" name="name1" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="name1">Last Name</label>
+                    <input type="text" id="name1" name="name1" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="signature2">Sample Signature</label>
+                    <input type="file" id="signature2" name="signature2" accept="image/*" required>
+                </div>
+            </div>
+
+            <br><br>
+
+            <div class="form-group">
+                <label for="bedcCertificate">BEDC Certificate (Contractor/Vendor)</label>
+                <input type="file" id="bedcCertificate" name="bedcCertificate" accept="image/*" required><br>
+            </div>
+
+            <div class="form-group">
+                <label for="nemsaLicense">Valid NEMSA License (Contractor/Vendor)</label>
+                <input type="file" id="nemsaLicense" name="nemsaLicense" accept="image/*" required><br>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const contractor = JSON.parse(localStorage.getItem('contractor'));
+        console.log("contractor");
+    </script>
+
+    <!-- <script src="script.js"></script> -->
+    <script>
+        document.getElementById('principalPersonsForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+    
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+    
+            const response = await fetch('http://localhost:4000/submitForm', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+    
+            const result = await response.json();
+            if (response.ok) {
+                alert('Form submitted successfully!');
+            } else {
+                alert('Error: ' + result.message);
+            }
+        });
+    </script>
+
+</body>
+</html>

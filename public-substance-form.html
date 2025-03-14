@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Substance Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Public Substation Form</h2>
+        <form>
+            <div class="form-group">
+           
+                <form id="contractor-form">
+                  <label for="contractorName">Contractor Name:</label>
+                  <input type="text" id="contractorName" name="contractorName" readonly><br>
+            
+                  <label for="bedcRegNumber">BEDC Registration Number:</label>
+                  <input type="text" id="bedcRegNumber" name="bedcRegNumber" readonly><br>
+            
+                  <label for="contractorEmail">Contractor Email:</label>
+                  <input type="email" id="contractorEmail" name="contractorEmail" readonly><br>
+                </form>
+                <label for="capacity">Proposed Capacity</label>
+                <input type="text" id="capacity" required><br>
+            </div>
+            <div class="form-group">
+                <label for="voltage">Voltage Level</label>
+                <input type="text" id="voltage" required><br>
+            </div>
+
+            <div class="form-group">
+                <label for="substationName">Substation Name</label>
+                <input type="text" id="substationName" required><br>
+            </div>
+
+            <div class="form-group">
+                <label for="substationLocation">Substation Location</label>
+                <input type="text" id="substationLocation" required><br>
+            </div>
+            
+            <div class="form-group">
+                <label for="Region">Region</label>
+                <select id="Region">
+                    <option value="Benin North">Benin North</option>
+                    <option value="Benin South">Benin South</option>
+                    <option value="Auchi/Uromi">Auchi/Uromi</option>
+                    <option value="Sapele">Sapele</option>
+                    <option value="Asaba">Asaba</option>
+                    <option value="Akure">Akure</option>
+                    <option value="Ekiti">Ekiti</option>
+                    <option value="Ondo">Ondo</option>
+                    <option value="Warri">Warri</option>
+                </select><br>
+            </div>
+
+            <div class="form-group">
+                <label for="evidencePayment">Evidence of Payment</label>
+                <input type="file" id="evidencePayment" name="evidencePayment" accept="image/*" required><br>
+            </div>
+
+            <div class="form-group">
+                <label for="clientLetter">Client Letter</label>
+                <input type="file" id="clientLetter" name="clientLetter" accept="image/*" required><br>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
